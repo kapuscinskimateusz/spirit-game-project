@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveInput = 0f;
-    public float moveSpeed;
-
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundMask;
-    public float jumpForce;
+    public float moveInput = 0f;
+    public float moveSpeed = 10f;
+    public float jumpForce = 400f;
 
     private Rigidbody2D rb;
     private Animator animator;
+    private PlayerAttack playerAttack;
 
     private bool isFacingRight = true;
-    private bool isGrounded = false;
 
+    private bool isGrounded = false;
+    public bool isPrejumping = false;
     private bool isJumping = false;
+    private bool isFalling = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     // Update is called once per frame
@@ -34,38 +37,45 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            animator.SetFloat("Velocity", Mathf.Abs(moveInput));
+            animator.SetFloat("xVelocity", Mathf.Abs(moveInput));
+        }
+        else
+        {
+            isPrejumping = false;
         }
 
-        if (rb.velocity.y < 0 && !isGrounded)
+        if (isGrounded && Input.GetButtonDown("Jump")) // PREJUMP ANIMATION
         {
-            animator.SetBool("IsFalling", true);
-            animator.Play("Player_Falling");
-        }
-
-        if (animator.GetBool("IsFalling") && isGrounded)
-        {
-            animator.SetBool("IsFalling", false);
-            animator.Play("Player_Landing");
-        }
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            animator.SetBool("IsPrejump", true);
+            isPrejumping = true;
             animator.Play("Player_Prejump");
         }
 
-        if (Input.GetButtonUp("Jump") && isGrounded && animator.GetBool("IsPrejump"))
+        if (isGrounded && Input.GetButtonUp("Jump")) // JUMP
         {
-            animator.SetBool("IsPrejump", false);
             isJumping = true;
+        }
+
+        if (!isGrounded && rb.velocity.y > 0 && !playerAttack.isAttacking) // JUMP ANIMATION
+        {
             animator.Play("Player_Jump");
+        }
+
+        if (!isGrounded && rb.velocity.y < 0 && !playerAttack.isAttacking) // FALLING ANIMATION
+        {
+            isFalling = true;
+            animator.Play("Player_Falling");
+        }
+
+        if (isFalling && isGrounded) // LANDING ANIMATION
+        {
+            isFalling = false;
+            animator.Play("Player_Landing");
         }
     }
 
     private void FixedUpdate()
     {
-        if (!animator.GetBool("IsPrejump"))
+        if (!isPrejumping)
             rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
         else
             rb.velocity = Vector2.zero;

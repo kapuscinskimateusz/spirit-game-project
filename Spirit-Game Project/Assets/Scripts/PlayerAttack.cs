@@ -4,29 +4,35 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public float attackRange = 0.5f;
+    
     public Transform attackPoint;
 
-    public float attackRange = 0.5f;
-
     private Animator animator;
+    private PlayerMovement playerMovement;
+
+    public bool isAttacking = false;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && !playerMovement.isPrejumping)
         {
+            isAttacking = true;
             animator.Play("Player_Attack");
         }
     }
 
-    void Attack()
+    private void Attack()
     {
+        isAttacking = false;
     }
 
     private void OnDrawGizmosSelected()
