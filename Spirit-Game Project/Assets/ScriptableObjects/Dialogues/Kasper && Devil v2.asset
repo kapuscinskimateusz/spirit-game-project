@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fe74d38094b074e879b943b8f3c1d1, type: 3}
+  m_Name: Kasper && Devil v2
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 1cb102b39d7097c49bf6b215759890ae, type: 2}
+  speakerRight: {fileID: 11400000, guid: 3a79783765d3d8e46b6fdb06e8b25efe, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 1cb102b39d7097c49bf6b215759890ae, type: 2}
+    sentence: "Cze\u015B\u0107... To znowu ja."
+  - character: {fileID: 11400000, guid: 3a79783765d3d8e46b6fdb06e8b25efe, type: 2}
+    sentence: "Zuch ch\u0142opak. Wiedzia\u0142em, \u017Ce wr\xF3cisz."
+  question: {fileID: 11400000, guid: 8d683303e8a2d374380121d057d32426, type: 2}

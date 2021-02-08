@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundMask;
-    public float moveInput = 0f;
     public float moveSpeed = 10f;
     public float jumpForce = 400f;
+    private float moveInput = 0f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -44,15 +44,18 @@ public class PlayerMovement : MonoBehaviour
             isPrejumping = false;
         }
 
-        if (isGrounded && Input.GetButtonDown("Jump")) // PREJUMP ANIMATION
+        if (!GameManager.instance.gameIsFrozen)
         {
-            isPrejumping = true;
-            animator.Play("Player_Prejump");
-        }
+            if (isGrounded && Input.GetButtonDown("Jump")) // PREJUMP ANIMATION
+            {
+                isPrejumping = true;
+                animator.Play("Player_Prejump");
+            }
 
-        if (isGrounded && Input.GetButtonUp("Jump")) // JUMP
-        {
-            isJumping = true;
+            if (isGrounded && Input.GetButtonUp("Jump")) // JUMP
+            {
+                isJumping = true;
+            }
         }
 
         if (!isGrounded && rb.velocity.y > 0 && !playerAttack.isAttacking) // JUMP ANIMATION

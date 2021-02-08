@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fe74d38094b074e879b943b8f3c1d1, type: 3}
+  m_Name: Kasper && Angel
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 1cb102b39d7097c49bf6b215759890ae, type: 2}
+  speakerRight: {fileID: 11400000, guid: 0f0514bf1c0901149bb12c17848ea397, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 0f0514bf1c0901149bb12c17848ea397, type: 2}
+    sentence: "Cze\u015B\u0107 Kasprze."
+  - character: {fileID: 11400000, guid: 1cb102b39d7097c49bf6b215759890ae, type: 2}
+    sentence: "Cz-cz-cze\u015B\u0107?"
+  - character: {fileID: 11400000, guid: 0f0514bf1c0901149bb12c17848ea397, type: 2}
+    sentence: "Czy rozmawia\u0142e\u015B ju\u017C z diab\u0142em? Ma on bardzo z\u0142e
+      zamiary. Prosz\u0119, pom\xF3\u017C mi mu w tym przeszkodzi\u0107."
+  - character: {fileID: 11400000, guid: 1cb102b39d7097c49bf6b215759890ae, type: 2}
+    sentence: "Ty te\u017C znasz moje imi\u0119? Pozw\xF3l mi si\u0119 zastanowi\u0107.
+      Narazie nic z tego nie rozumiem."
+  question: {fileID: 11400000, guid: 3faa98a17baaa7049b39f9a9cba2d9fa, type: 2}

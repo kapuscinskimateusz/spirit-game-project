@@ -5,11 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
+    public bool gameIsFrozen = false;
+
     private GameObject gameplayObjects;
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
         gameplayObjects = GameObject.Find("GameplayObjects");
+    }
+
+    private void Update()
+    {
+        if (gameIsFrozen)
+            Time.timeScale = 0f;
+        else if (!gameIsFrozen && !PauseMenu.GameIsPaused)
+            Time.timeScale = 1f;
     }
 
     private void OnEnable()
@@ -26,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(scene.name);
 
-        if (scene.name == "Menu")
+        if (scene.name == "Menu" || scene.name == "Heaven")
         {
             gameplayObjects.SetActive(false);
         }
