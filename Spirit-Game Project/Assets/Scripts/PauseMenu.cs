@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.instance.gameIsOver)
         {
             if (GameIsPaused)
                 Resume();
@@ -23,22 +23,26 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        GameManager.instance.gameIsFrozen = false;
         GameIsPaused = false;
     }
 
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        GameManager.instance.gameIsFrozen = true;
         GameIsPaused = true;
+    }
+
+    public void Restart()
+    {
+        LevelManager.instance.RestartLevel();
+        Resume();
     }
 
     public void Quit()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-        SceneManager.LoadScene("Menu");
+        LevelManager.instance.GoToMenu();
+        Resume();
     }
 }
