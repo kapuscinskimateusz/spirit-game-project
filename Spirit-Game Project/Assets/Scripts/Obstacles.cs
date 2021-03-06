@@ -7,6 +7,6 @@ public class Obstacles : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collInfo)
     {
         if (collInfo.gameObject.CompareTag("Player"))
-            HealthSystem.instance.Die();
+            HealthManager.instance.Die();
     }
 }

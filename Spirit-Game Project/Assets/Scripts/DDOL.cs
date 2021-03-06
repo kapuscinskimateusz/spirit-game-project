@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DDOL : MonoBehaviour
 {
@@ -9,3 +7,4 @@ public class DDOL : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 }
+

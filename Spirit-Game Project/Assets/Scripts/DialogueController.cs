@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class QuestionEvent : UnityEvent<Question, GameObject> { }
+public class QuestionEvent : UnityEvent<Question, NPC> { }
 
 public class DialogueController : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class DialogueController : MonoBehaviour
 
     private Queue<Line> lines;
     private Question question;
-    private GameObject talkingNpc;
+    private NPC npc;
 
     private void Start()
     {
@@ -38,10 +38,10 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, GameObject _talkingNpc)
     {
-        talkingNpc = _talkingNpc;
+        npc = _talkingNpc.GetComponent<NPC>();
 
         dialogueStarted = true;
-        GameManager.instance.gameIsFrozen = true;
+        GameManager.instance.GameIsFrozen = true;
 
         lines.Clear();
 
@@ -92,7 +92,7 @@ public class DialogueController : MonoBehaviour
         speakerLeftUI.Hide();
         speakerRightUI.Hide();
 
-        questionEvent.Invoke(question, talkingNpc);
+        questionEvent.Invoke(question, npc);
     }
 
     private void SetDialogue(SpeakerUI activeSpeakerUI, SpeakerUI inactiveSpeakerUI, string text)

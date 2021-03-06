@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);
@@ -44,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             isPrejumping = false;
         }
 
-        if (!GameManager.instance.gameIsFrozen)
+        if (!GameManager.instance.GameIsFrozen)
         {
             if (isGrounded && Input.GetButtonDown("Jump")) // PREJUMP ANIMATION
             {
@@ -69,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             animator.Play("Player_Falling");
         }
 
-        if (isFalling && isGrounded) // LANDING ANIMATION
+        if (isFalling && isGrounded && !playerAttack.isAttacking) // LANDING ANIMATION
         {
             isFalling = false;
             animator.Play("Player_Landing");

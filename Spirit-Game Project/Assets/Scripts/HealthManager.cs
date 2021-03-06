@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSystem : MonoBehaviour
+public class HealthManager : MonoBehaviour
 {
     public int maxHealth;
     private int currentHealth;
@@ -12,10 +12,9 @@ public class HealthSystem : MonoBehaviour
         get { return currentHealth; }
     }
 
-    public HealthSystemUI healthSystemUI;
-    private Transform player;
+    public PlayerHealthUI healthSystemUI;
 
-    public static HealthSystem instance = null;
+    public static HealthManager instance = null;
 
     void Awake()
     {
@@ -27,7 +26,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        ResetHealth();
 
         healthSystemUI.SetMaxHealth(maxHealth);
     }
@@ -43,12 +42,7 @@ public class HealthSystem : MonoBehaviour
         currentHealth -= damage;
         healthSystemUI.SetCurrentHealth(currentHealth);
 
-        if (currentHealth > 0)
-        {
-            player = GameObject.Find("Player").transform;
-            player.position = GameManager.instance.lastCheckPointPos;
-        }
-        else
+        if (currentHealth <= 0)
             Die();
     }
 
@@ -59,13 +53,17 @@ public class HealthSystem : MonoBehaviour
         healthSystemUI.SetCurrentHealth(currentHealth);
     }
 
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        healthSystemUI.SetCurrentHealth(currentHealth);
+    }
+
     public void Die()
     {
-        currentHealth = 0;
-        healthSystemUI.SetCurrentHealth(currentHealth);
-
-        GameManager.instance.GameOver();
+        GameManager.instance.GameIsOver = true;
 
         Debug.Log("You are died.");
     }
 }
+

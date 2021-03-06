@@ -1,45 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    public GameObject gameOverUI;
+    public GameObject gameOverMenuUI;
 
     private bool isDisplayed = false;
 
     private void Update()
     {
-        if (GameManager.instance.gameIsOver && !isDisplayed)
+        if (GameManager.instance.GameIsOver && !isDisplayed)
+        {
             ShowUI();
-        else if (!GameManager.instance.gameIsOver && isDisplayed)
-            HideUI();
-    }
-
-    public void Restart()
-    {
-        GameManager.instance.gameIsOver = false;
-        LevelManager.instance.RestartLevel();
-    }
-
-    public void Quit()
-    {
-        GameManager.instance.gameIsOver = false;
-        LevelManager.instance.GoToMenu();
+        }
     }
 
     private void ShowUI()
     {
-        gameOverUI.SetActive(true);
-        isDisplayed = true;
-        GameManager.instance.gameIsFrozen = true;
+        gameOverMenuUI.SetActive(true);
+        GameManager.instance.GameIsFrozen = true;
     }
 
     private void HideUI()
     {
-        gameOverUI.SetActive(false);
-        isDisplayed = false;
-        GameManager.instance.gameIsFrozen = false;
+        gameOverMenuUI.SetActive(false);
+        GameManager.instance.GameIsOver = false;
+        GameManager.instance.GameIsFrozen = false;
+    }
+
+    public void Restart()
+    {
+        HideUI();
+        LevelManager.instance.LoadCurrentLevel();
+    }
+
+    public void Quit()
+    {
+        HideUI();
+        LevelManager.instance.LoadMenu();
     }
 }

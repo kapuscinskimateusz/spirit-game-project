@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform player;
-
     public float moveSpeed = 2.5f;
     public float distance = 1f;
-
-    private bool movingRight = true;
+    public int attackDamage = 1;
 
     public Transform groundDetection;
+    public Transform player;
+
+    private bool movingRight = true;
 
     public virtual void Patrol()
     {
@@ -33,12 +33,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void Attack()
+    public virtual void Attack() 
     {
-        Debug.Log("Attack");
+        HealthManager.instance.TakeDamage(attackDamage);
     }
 
-    public void LookAtPlayer()
+    protected void LookAtPlayer()
     {
         if (transform.position.x > player.position.x && movingRight)
         {

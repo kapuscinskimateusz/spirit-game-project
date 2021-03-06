@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSystemUI : MonoBehaviour
+public class PlayerHealthUI : MonoBehaviour
 {
     public Image[] hearts;
     public Sprite fullHeart;

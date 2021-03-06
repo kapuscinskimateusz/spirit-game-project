@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public float attackRange = 0.5f;
-    
+    public int attackDamage = 40;
+    public LayerMask damageableLayers;
+
     public Transform attackPoint;
 
     private Animator animator;
@@ -33,6 +35,13 @@ public class PlayerAttack : MonoBehaviour
     private void Attack()
     {
         isAttacking = false;
+
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, damageableLayers);
+
+        foreach (Collider2D hitObject in hitObjects)
+        {
+            hitObject.GetComponent<Damageable>().TakeDamage(attackDamage);
+        }
     }
 
     private void OnDrawGizmosSelected()

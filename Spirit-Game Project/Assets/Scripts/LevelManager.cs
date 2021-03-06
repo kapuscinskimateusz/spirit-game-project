@@ -19,33 +19,39 @@ public class LevelManager : MonoBehaviour
         gameplayObjects = GameObject.Find("GameplayObjects");
     }
 
-    public void GoToMenu()
+    public void LoadIntroduction()
+    {
+        SceneManager.LoadScene("Introduction");
+    }
+
+    public void LoadHell()
+    {
+        SceneManager.LoadScene("Hell");
+    }
+
+    public void LoadHellBoss()
+    {
+        SceneManager.LoadScene("Hell_Boss");
+    }
+
+    public void LoadHeaven()
+    {
+        SceneManager.LoadScene("Heaven");
+    }
+
+    public void LoadCurrentLevel()
+    {
+        SceneManager.LoadScene(GetCurrentLevel());
+    }
+
+    public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
     }
 
-    public void GoToIntroduction()
+    public void LoadCredits()
     {
-        HealthSystem.instance.Heal(HealthSystem.instance.maxHealth - HealthSystem.instance.CurrentHealth);
-        SceneManager.LoadScene("Introduction");
-    }
-
-    public void GoToHell()
-    {
-        HealthSystem.instance.Heal(HealthSystem.instance.maxHealth - HealthSystem.instance.CurrentHealth);
-        SceneManager.LoadScene("Hell");
-    }
-
-    public void GoToHeaven()
-    {
-        HealthSystem.instance.Heal(HealthSystem.instance.maxHealth - HealthSystem.instance.CurrentHealth);
-        SceneManager.LoadScene("Heaven");
-    }
-
-    public void RestartLevel()
-    {
-        HealthSystem.instance.Heal(HealthSystem.instance.maxHealth - HealthSystem.instance.CurrentHealth);
-        SceneManager.LoadScene(GetCurrentLevel());
+        SceneManager.LoadScene("Credits");
     }
 
     private int GetCurrentLevel()
@@ -67,11 +73,15 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log(scene.name);
 
-        if (scene.name == "Menu" || scene.name == "Heaven")
+        if (scene.name == "Menu" || scene.name == "Heaven" || scene.name == "Credits")
         {
             gameplayObjects.SetActive(false);
         }
         else
+        {
             gameplayObjects.SetActive(true);
+            HealthManager.instance.ResetHealth();
+        }
     }
 }
+

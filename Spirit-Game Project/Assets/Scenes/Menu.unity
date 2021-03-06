@@ -203,8 +203,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1560342508}
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 4035967562720292904, guid: f73470a6d9b366d4c9d26612039c3ff2,
+          type: 3}
+        m_MethodName: LoadIntroduction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1156,7 +1157,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1560342508}
+      - m_Target: {fileID: 2705406769307378528, guid: d81fda026d3baae44880face7e52a722,
+          type: 3}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Walker : Enemy
+public class HellishWalker : Enemy
 {
     public float enemyTerritory = 3f;
     public float attackRange = 0.8f;
 
     public Transform attackPoint;
+    public LayerMask playerLayer;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -60,7 +61,9 @@ public class Walker : Enemy
         LookAtPlayer();
 
         if (Vector2.Distance(player.position, rb.position) >= enemyTerritory)
+        {
             state = State.Patrolling;
+        }
 
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
         if (groundInfo.collider == true)
@@ -78,13 +81,13 @@ public class Walker : Enemy
 
     public override void Attack()
     {
-        base.Attack();
-
-        Collider2D hitInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange);
-        if (hitInfo.gameObject.CompareTag("Player"))
-            HealthSystem.instance.TakeDamage(1);
-
         animator.ResetTrigger("Attack");
+
+        Collider2D hitInfo = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
+        if (hitInfo)
+        {
+            base.Attack();
+        }
 
         state = State.ChaseTarget;
     }

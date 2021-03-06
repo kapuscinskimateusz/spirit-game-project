@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Heaven.unity
     guid: 4da23c33cbf5fdc47a645ccb290bce7b
+  - enabled: 1
+    path: Assets/Scenes/Hell_Boss.unity
+    guid: 204cfc3aacb3da94c8332b2cbca1fb62
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: d0fdabac8c90ed9459de9b55ca17437a
   m_configObjects: {}

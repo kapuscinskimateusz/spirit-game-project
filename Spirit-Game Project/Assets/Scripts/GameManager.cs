@@ -7,9 +7,25 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    public bool gameIsFrozen = false;
-    public bool gameIsOver = false;
-    public Vector2 lastCheckPointPos;
+    private bool gameIsFrozen = false;
+    public bool GameIsFrozen
+    {
+        get { return gameIsFrozen; }
+        set
+        {
+            gameIsFrozen = value;
+        }
+    }
+
+    private bool gameIsOver = false;
+    public bool GameIsOver
+    {
+        get { return gameIsOver; }
+        set
+        {
+            gameIsOver = value;
+        }
+    }
 
     private void Awake()
     {
@@ -27,8 +43,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
     }
 
-    public void GameOver()
+    public void QuitGame()
     {
-        gameIsOver = true;
+        Application.Quit();
     }
 }

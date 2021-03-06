@@ -12,10 +12,10 @@ public class QuestionController : MonoBehaviour
     private Question question;
     private UnityEvent npcEvent;
 
-    public void Change(Question _question, GameObject talkingNpc)
+    public void Change(Question _question, NPC _npc)
     {
         question = _question;
-        npcEvent = talkingNpc.GetComponent<NPC>().npcEvent;
+        npcEvent = _npc.npcEvent;
 
         gameObject.SetActive(true);
         Initialize();
@@ -28,13 +28,13 @@ public class QuestionController : MonoBehaviour
         secondChoice.GetComponentInChildren<Text>().text = question.secondChoice;
     }
 
-    public void OnAnswerYes()
+    public void AnswerYes()
     {
         EndQuestion();
         npcEvent.Invoke();
     }
 
-    public void OnAnswerNo()
+    public void AnswerNo()
     {
         EndQuestion();
     }
@@ -42,6 +42,6 @@ public class QuestionController : MonoBehaviour
     private void EndQuestion()
     {
         gameObject.SetActive(false);
-        GameManager.instance.gameIsFrozen = false;
+        GameManager.instance.GameIsFrozen = false;
     }
 }
