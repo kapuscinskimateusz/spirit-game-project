@@ -1,2 +1,2 @@
 # spirit-game-project
-Game that I create for college.
+Game that I create.
